@@ -6,7 +6,8 @@
 #  - Ausführung von setup_pki_nginx.ps1
 
 Param(
-    [string]$ProjectRoot = $(Get-Location).Path
+    [string]$ProjectRoot = $(Get-Location).Path,
+    [string]$OpenSslPath = "C:\Program Files\OpenSSL-Win64\bin\openssl.exe"
 )
 
 Write-Host "=== OpenSSL-PKI-Docker-Automation Windows Bootstrap ===" -ForegroundColor Cyan
