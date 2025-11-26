@@ -9,6 +9,54 @@ set -euo pipefail
 #
 ##############################################
 
+
+##############################################
+# Docker & Docker Compose Installation (Ubuntu/Debian)
+##############################################
+
+install_docker() {
+  echo ">>> Prüfe, ob Docker installiert ist..."
+
+  if command -v docker >/dev/null 2>&1; then
+    echo ">>> Docker ist bereits installiert."
+    return
+  fi
+
+  echo ">>> Docker nicht gefunden. Installiere Docker..."
+
+  # Alte Versionen entfernen
+  sudo apt-get remove -y docker docker-engine docker.io containerd runc 2>/dev/null || true
+
+  # Paketquellen aktualisieren
+  sudo apt-get update -y
+
+  # benötigte Pakete installieren
+  sudo apt-get install -y ca-certificates curl gnupg lsb-release
+
+  # Docker GPG Key
+  sudo install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+  # Docker Repo hinzufügen
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+  # Docker installieren
+  sudo apt-get update -y
+  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+  # Docker-Dienst starten + aktivieren
+  sudo systemctl enable docker
+  sudo systemctl start docker
+
+  echo ">>> Docker erfolgreich installiert!"
+}
+
+# Installation ausführen
+install_docker
+
 # --- OpenSSL finden ---
 if command -v openssl >/dev/null 2>&1; then
   OPENSSL_BIN="$(command -v openssl)"
