@@ -73,7 +73,7 @@ project/
 ### 1. Repo klonen
 
 ```bash
-git clone https://github.com/<dein-user>/OpenSSL-PKI-Docker-Automation
+git clone https://github.com/0xWunda/OpenSSL-PKI-Docker-Automation
 cd OpenSSL-PKI-Docker-Automation
 ```
 
