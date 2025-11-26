@@ -281,15 +281,3 @@ Wenn dir dieses Projekt gefällt:
 
 ```
 
----
-
-Das ist eine **perfekte GitHub-README** für dein Projekt.  
-Wenn du willst, kann ich:
-
-✔ Badges einbauen  
-✔ Screenshots generieren  
-✔ ein PKI-Diagramm (Mermaid) einfügen  
-✔ eine englische Version erstellen  
-
-Sag einfach Bescheid!
-```
